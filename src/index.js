@@ -11,8 +11,10 @@ export default class Store {
     return this.__state
   }
 
+  // *TODO: write deep copy here | Created at: 27.Sep.2019
   set _state(newState) {
-    this._state = newState
+    this.__state = newState
+    this._notify()
   }
 
   subscribe = handler => {
@@ -39,6 +41,10 @@ export default class Store {
 
   _unsubscribe = handler => {
     this.__subscribers = this.__subscribers.filter(sub => sub !== handler)
+  }
+
+  _notify = () => {
+    this.__subscribers.forEach(subscriber => subscriber(this.getState()))
   }
 }
 
