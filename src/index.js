@@ -48,7 +48,7 @@ export default class Store {
   }
 }
 
-export function thunk() {
+export function useThunk() {
   return ({ dispatch, getState }) => next => action => {
     if (typeof action === 'function') {
       return action(dispatch, getState())
