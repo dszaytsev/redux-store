@@ -1,3 +1,5 @@
+import { cloneDeep } from 'lodash'
+
 export class Store {
   __subscribers = []
   __state = {}
@@ -11,9 +13,8 @@ export class Store {
     return this.__state
   }
 
-  // *TODO: write deep copy here | Created at: 27.Sep.2019
   set _state(newState) {
-    this.__state = newState
+    this.__state = cloneDeep(newState)
     this._notify()
   }
 
