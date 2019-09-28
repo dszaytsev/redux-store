@@ -1,5 +1,5 @@
 export function connectStore(store, Component) {
-  return class extends Component {
+  class WithStoreComponent extends Component {
     constructor(elem, props) {
       super(elem, props)
 
@@ -7,4 +7,7 @@ export function connectStore(store, Component) {
       this.dispatch = store.dispatch
     }
   }
+  WithStoreComponent.prototype.dispatch = store.dispatch
+
+  return WithStoreComponent
 }
