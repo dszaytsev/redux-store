@@ -2,11 +2,7 @@ export class Component {
   constructor(elem, props) {
     this.props = props
     this.elem = elem
-
-    this.init()
   }
-
-  init() { }
 
   updateDOM(state) {
     this.elem.innerHTML = this.render(state)
