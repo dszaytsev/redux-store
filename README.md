@@ -51,7 +51,7 @@ store.subscribe(state => console.log(state))
 store.use(middleware)
 ```
 **middleware** — позволяет расширить логику между отправкой action и reducer'ом, принимающим этот action.
-```
+```js
 const logger = store => next => action => {
   console.log('dispatching', action)
   let result = next(action)
@@ -140,16 +140,24 @@ connectStore(store, Component)
 // { counter: 0 }
 
 class Counter extends Component {
+  constructor(element) {
+    super(element)
+
+    this.elem.addEventListener('click', () => {
+      this.dispatch(increment())
+    })
+  }
+
   render({ counter }) {
     return `<span>${counter}</span>`
   }
 }
 
-connectStore(store, Counter)
+const WithStoreCounter = connectStore(store, Counter)
 
 const counterElem = document.getElementById('counter')
 
-new Counter(counterElem)
+new WithStoreCounter(counterElem)
 
 store.dispatch(increment())
 store.dispatch(increment())
@@ -163,3 +171,5 @@ store.dispatch(increment())
 </div>
 <!-- ... -->
 ```
+
+Данный пример доступен в папке example
